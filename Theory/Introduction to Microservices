@@ -1,0 +1,45 @@
+
+Monolithic Server Architecture:
+
+A monolith server consists of the middle-ware, code, routes and databases for all the features in a single service. When a request arrives to the service, the routes route the request to the appropriate code and eecution takes place. All the features share the same database. 
+
+Microservices architecture
+
+In a Microservice based architecture, each of the features consists of its own middle-ware, code, routes and databases. Each of these individual and distinct features are called services or micro-services. 
+
+Data access rules for Microservices architecture:
+
+1. One service cannot write data into the database of another service.
+2. One service canot directly read data from the database of another service.
+
+Advantage of Microservices architecture:
+
+1. Each of the feature/service runs independently of the other.
+2. Changes in database schema/structure of one service does not affect another service.
+3. If one service goes down, then the other services are not affected.
+4. Some services might require sql databases wherewas some services might require no-sql databases. This can be achieved.
+
+How do microservices store data?
+Each of the service has its own database. Whenever an entry needs to be stored in a database, a request to the database is made.
+
+How do microservices read data?
+
+Two methods:
+1. Synchronous method: This method involves a service making a network request to another service for data. These requests are then handled by routes of the other service and the requested data is returned. 
+
+Advantages and Disadvantages:
+
+a. If there is a schema change in the other service, then the code of the requesting service also needs to be changed. 
+b. Easy to understand the concept.
+c. Increase in execution time. The execution time is as slow as the slowest request.
+d. There can be a web of requests. 
+e. Seperate database is not required. 
+
+2. Event-based methods: Makes use of asynchronous events to exchange data. 
+There are two ways of using event-based mechanisims.
+
+a. Simple method: There is an Event Bus which stores all events. The requesting service makes an event to request for data. This is stored in the Event Bus. The Event Bus then requests the appropiate service and fetches the data. The requesting service then reads the data through another event from the Event Bus. 
+This method shares the same advantages and disadvantages as the Synchronous method. 
+
+b. Truly Asynchronous: Here the requesting service makes periodic event requests to the Event Bus to check if any suitable data has arrived. The different services store data in their own databases and also simultaneously trigger events to send this data to the Event Bus so that if there is any requesting service, then the data can be consumed from the Event Bus. 
+The only disadvantage of this method is that it results in duplication of data stored in database. But the good thing is that data storage has become cheap and this data duplication will not cost much. 
