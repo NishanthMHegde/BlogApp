@@ -6,7 +6,7 @@ import CommentsList from './CommentsList';
 export default() => {
 	const [posts, setPosts] = useState({});
 	const fetchPosts = async() =>{
- 		const res = await axios.get('http://127.0.0.1:4000/posts');
+ 		const res = await axios.get('http://127.0.0.1:4002/posts');
  		setPosts(res.data);
 };
 
@@ -22,7 +22,7 @@ export default() => {
 			>
 			<div className="card-body">
 			<h3>{post.title}</h3>
-			<CommentsList postId={post.id}/>
+			<CommentsList comments={post.comments}/>
 			<CommentsCreate postId={post.id} />
 			</div>
 			</div>
