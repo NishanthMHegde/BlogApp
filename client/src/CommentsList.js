@@ -4,8 +4,18 @@ import axios from 'axios';
 export default({comments}) => {
 
 	const renderedComments = comments.map(comment=>{
+		let content;
+		if (comment.status === 'pending'){
+			content = "This comment is pending moderation";
+		}
+		else if (comment.status === 'rejected'){
+			content = "This comment was rejected";
+		}
+		else{
+			content = comment.content;
+		}
 		return (
-			<li key={comment.id}>{comment.content}</li>
+			<li key={comment.id}>{content}</li>
 			);
 	});
 
