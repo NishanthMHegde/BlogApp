@@ -18,7 +18,7 @@ app.post('/posts/:id/comments', async (req,res)=>{
 	const {content} = req.body;
 	comments.push({id: commentId, content, status:'pending'});
 	commentsByPostID[req.params.id] = comments;
-	await axios.post('http://127.0.0.1:4005/events', {type: 'CommentsQuery', data: {id: commentId, content, postId:req.params.id, status:'pending'}});
+	await axios.post('http://eventbus-clusterip-srv:4005/events', {type: 'CommentsQuery', data: {id: commentId, content, postId:req.params.id, status:'pending'}});
 	res.status(201).send(comments);
 });
 
@@ -32,7 +32,7 @@ app.post('/events', async (req,res)=>{
 			return comment.id === id;
 		});
 		comment.status = status;
-		await axios.post('http://127.0.0.1:4005/events',{
+		await axios.post('http://eventbus-clusterip-srv:4005/events',{
 			type:'CommentsUpdated',
 			data: {
 				id,

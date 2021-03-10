@@ -13,7 +13,7 @@ app.post('/events', async (req,res)=>{
 		console.log("Received CommentsQuery");
 		const {id, postId, content} = data;
 		const status = content.includes('fcuk')? 'rejected': 'approved';
-		await axios.post('http://127.0.0.1:4005/events',{
+		await axios.post('http://eventbus-clusterip-srv:4005/events',{
 			type: 'CommentsModerated',
 			data:{
 				id,

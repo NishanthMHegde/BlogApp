@@ -9,10 +9,10 @@ app.use(cors());
 const events = [];
 app.post('/events', (req, res)=>{
 	events.push(req.body);
-	axios.post('http://127.0.0.1:4000/events', req.body);
-	axios.post('http://127.0.0.1:4001/events', req.body);
-	axios.post('http://127.0.0.1:4002/events', req.body);
-	axios.post('http://127.0.0.1:4003/events', req.body);
+	axios.post('http://posts-clusterip-srv:4000/events', req.body);
+	axios.post('http://comments-clusterip-srv:4001/events', req.body);
+	axios.post('http://query-service-clusterip-srv:4002/events', req.body);
+	axios.post('http://moderation-service-clusterip-srv:4003/events', req.body);
 });
 
 app.get('/events', (req,res)=>{
